@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<ProMonitorIntegrationTest.ViewModels.LearnerProgressViewModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProMonitor Integration Test Application</title>
+    <style>
+        h1, h2, th, td  { font-family:arial; font-size:80%; }
+        h1, h2, pre { margin: 0 0 10px 0; } 
+        h1 { font-size:90%; }
+        table { width:100%; border-collapse: collapse; }
+        th { border-bottom: solid 1px black; }
+        td { border-bottom: solid 1px grey; height: 30px; }
+        .text-centre { text-align:center; }
+    </style>
+</head>
+<body>
+<h1>Compass Computer Consultants ProMonitor Integration Test Harness</h1>
+<h2>Web.config Required Settings</h2>
+<pre><code>&lt;!-- API Access Related Application Keys--&gt;
+&lt;add key="Api.Username" value="compass@compasscc.com" /&gt;
+&lt;add key="Api.Password" value="6C12812E-D010-4C05-93BD-F63CEAEA15Cb" /&gt;
+&lt;add key="Api.Url" value="https://test3api.e-portfolioqcf.com/" /&gt;
+&lt;add key="Api.Thumbprint" value="33f6b7a0e31d6ecafbbdadac8f7b8ed357850197" /&gt;
+&lt;add key="Api.ClientKey" value="08ECEAE8-B013-4EC1-9B6E-94F279AC7529" /&gt;</code></pre>
+<h2>Recommended Target Framework</h2>
+<pre><code>.NET Framework 4.5 or above</code></pre>
+<h2>Recommended NuGet Packages</h2>
+<pre><code>Install-Package Newtonsoft.Json -Version 7.0.1
+Install-Package Microsoft.AspNet.WebApi.Client</code></pre>
+<h2>Example API calls:</h2>
+<pre><code>var learnerId = "TEST012345A";
+var progress = _api.CallApiPost&lt;List&lt;LearnerProgress&gt;&gt;(ApiEndPoints.LearnerProgress,
+    new LearnerProgressRequest {LearnerId = learnerId});
+var qualifications = _api.CallApiGet&lt;List&lt;Qualification&gt;&gt;(ApiEndPoints.Qualification);</code></pre>
+<h2>Data from API:</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Qualification Name</th>
+        <th>Qualification Type</th>
+        <th>Assessed Percentage</th>
+        <th>Assessed Total</th>
+        <th>Mapped Percentage</th>
+        <th>Mapped Total</th>
+        <th>Total Course Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.QualificationName</td>
+            <td>@item.UnitType</td>
+            <td class="text-centre">@item.AssessedPCPercentage</td>
+            <td class="text-centre">@item.AssessedPCTotal</td>
+            <td class="text-centre">@item.MappedPCPercentage</td>
+            <td class="text-centre">@item.MappedPCTotal</td>
+            <td class="text-centre">@item.TotalCourseCount</td>
+        </tr>
+    }
+    </tbody>
+</table>
+</body>
+</html>
