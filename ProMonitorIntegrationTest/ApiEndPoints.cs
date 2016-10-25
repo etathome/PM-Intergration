@@ -6,6 +6,6 @@
         //public const string Qualification = "Partners/Qualifications";
         public const string LearnerProgress = "Learner/GetLearnerProgress";
         public const string Qualification = "Course/GetQualifications";
-        public const string strTest = "3nd";
+        public const string strTest = "2nd";
     }
 }
